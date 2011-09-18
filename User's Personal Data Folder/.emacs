@@ -19,3 +19,6 @@
 (setq whitespace-line-column '80
             whitespace-style '(lines-tail))
 (global-whitespace-mode t)
+
+;; Show column numbers
+(column-number-mode 1)
