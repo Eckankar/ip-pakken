@@ -14,3 +14,8 @@
       (send-string sml-process-name
         "use \"%%EMACSDIR%%/print.sml\";\n")))
 
+;; Highlight lines > 80 characters
+(require 'whitespace)
+(setq whitespace-line-column '80
+            whitespace-style '(lines-tail))
+(global-whitespace-mode t)
