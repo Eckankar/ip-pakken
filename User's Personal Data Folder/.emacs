@@ -37,3 +37,7 @@
 (defvar column-marker-4-face 'column-marker-4)
 (column-marker-create column-marker-4 column-marker-4-face)
 (add-hook 'sml-mode-hook (lambda () (interactive) (column-marker-4 81)))
+
+;; Don't clutter the filesystem tree with backup files
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
