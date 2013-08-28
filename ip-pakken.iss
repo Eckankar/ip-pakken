@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{16A559DB-7E90-42DF-B59D-E6F877FB9766}
 AppName=MosML og emacs
-AppVersion=2
+AppVersion=2.013
 ;AppVerName=MosML + emacs 2
 AppPublisher=DIKU
 AppPublisherURL=http://diku.dk
@@ -26,17 +26,17 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 
 [Files]
 Source: "mosml\*"; DestDir: "{app}\mosml"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: mosml
-Source: "emacs-23.2\*"; DestDir: "{app}\emacs-23.2"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: emacs
-Source: "User's Personal Data Folder\.emacs"; DestDir: "{%HOME|{userappdata}}"; Flags: onlyifdoesntexist ignoreversion uninsneveruninstall; Components: emacs
-Source: "setenv.exe"; DestDir: "{app}"; Flags: ignoreversion deleteafterinstall
+Source: "emacs-24.3\*"; DestDir: "{app}\emacs-24.3"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: emacs
+Source: "User's Personal Data Folder\*"; DestDir: "{%HOME|{userappdata}}"; Flags: onlyifdoesntexist ignoreversion uninsneveruninstall recursesubdirs createallsubdirs; Components: emacs
+Source: "setenv.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 [Dirs]
 ; tmp-dir for SML-mode
 Name: "{localappdata}\emacs\smltmp"; Components: emacs
 
 [Components]
-Name: "mosml"; Description: "Moscow ML v2.01"; Flags: fixed; Types: full custom
-Name: "emacs"; Description: "emacs v23.2"; Types: full custom
+Name: "mosml"; Description: "Moscow ML v2.10"; Flags: fixed; Types: full custom
+Name: "emacs"; Description: "emacs v24.3"; Types: full custom
 
 [Types]
 Name: "full"; Description: "{cm:FullInstall}"
@@ -48,10 +48,10 @@ Name: desktopicon; Description: "{cm:DesktopIcon}"
 
 [Icons]
 Name: "{group}\{cm:MosMLName}"; Filename: "{app}\mosml\bin\mosml.exe"; Components: mosml; Tasks: startmenu
-Name: "{group}\{cm:EmacsName}"; Filename: "{app}\emacs-23.2\bin\runemacs.exe"; Components: emacs; Tasks: startmenu
+Name: "{group}\{cm:EmacsName}"; Filename: "{app}\emacs-24.3\bin\runemacs.exe"; Components: emacs; Tasks: startmenu
 Name: "{group}\{cm:UninstallProgram,MosML + emacs}"; Filename: "{uninstallexe}"; Tasks: startmenu
 Name: "{commondesktop}\{cm:MosMLName}"; Filename: "{app}\mosml\bin\mosml.exe"; Components: mosml; Tasks: desktopicon
-Name: "{commondesktop}\{cm:EmacsName}"; Filename: "{app}\emacs-23.2\bin\runemacs.exe"; Components: emacs; Tasks: desktopicon
+Name: "{commondesktop}\{cm:EmacsName}"; Filename: "{app}\emacs-24.3\bin\runemacs.exe"; Components: emacs; Tasks: desktopicon
 
 [CustomMessages]
 en.FullInstall=Full installation
@@ -62,65 +62,28 @@ da.CustomInstall=Brugerdefineret installation
 en.StartMenu=Create Start Menu shortcuts
 da.StartMenu=Lav genveje i startmenuen
 en.DesktopIcon=Create shortcuts on your desktop
-da.DesktopIcon=Lav genveje pÃ¥ skrivebordet
+da.DesktopIcon=Lav genveje på skrivebordet
 
 en.MosMLName=MosML Commandline
 da.MosMLName=MosML Kommandolinje
-en.EmacsName=emacs 23.2 with SML-mode
-da.EmacsName=emacs 23.2 med SML-mode
+en.EmacsName=emacs 24.3 with SML-mode
+da.EmacsName=emacs 24.3 med SML-mode
 en.UninstallProgram=Uninstall %1
-da.UninstallProgram=AfinstallÃ©r %1
+da.UninstallProgram=Afinstallér %1
 
 en.Updating=Updating %1...
 da.Updating=Opdaterer %1...
 en.Setting=Setting %1...
-da.Setting=SÃ¦tter %1...
+da.Setting=Sætter %1...
+da.Deleting=Sletter %1...
+en.Deleting=Deleting %1...
 
 [Run]
 Filename: "{app}\setenv.exe"; Parameters: "-a PATH %""{app}\mosml\bin"""; StatusMsg: "{cm:Updating,PATH}"; Flags: runhidden; Components: mosml
-Filename: "{app}\setenv.exe"; Parameters: "-a MOSMLLIB ""{app}\mosml\lib"""; StatusMsg: "{cm:Setting,MOSMLLIB}"; Flags: runhidden; Components: mosml
-Filename: "{app}\setenv.exe"; Parameters: "-au HOME ""{%HOME|{userappdata}}"""; StatusMsg: "{cm:Setting,HOME}"; Flags: runhidden; Components: emacs
+Filename: "{app}\setenv.exe"; Parameters: "-a MOSMLLIB ""{app}\mosml\lib\mosml"""; StatusMsg: "{cm:Setting,MOSMLLIB}"; Flags: runhidden; Components: mosml
 
-[Code]
-procedure CurStepChanged(CurStep: TSetupStep);
-var
-  DotEmacs, SmlModeColor: String;
-  DotEmacsContents, SmlModeColorContents: String;
-  EmacsDir, SmlTempDir: String;
-begin
-  if (CurStep = ssPostInstall) and IsComponentSelected('emacs') then
-  begin
-    EmacsDir := ExpandConstant('{app}\emacs-23.2');
-    StringChangeEx(EmacsDir, '\', '/', True);
-
-    SmlTempDir := ExpandConstant('{localappdata}\emacs\smltmp');
-    StringChangeEx(SmlTempDir, '\', '/', True);
-
-    { Replace %%EMACSDIR%% in .emacs }
-    DotEmacs := ExpandConstant('{%HOME|{userappdata}}\.emacs');
-
-    if not LoadStringFromFile(DotEmacs, DotEmacsContents) then
-      RaiseException('Unable to read from .emacs.');
-
-    StringChangeEx(DotEmacsContents, '%%EMACSDIR%%', EmacsDir, True);
-
-    if not SaveStringToFile(DotEmacs, DotEmacsContents, False) then
-      RaiseException('Unable to write to .emacs.');
-
-    { Replace %%EMACSDIR%% and %%SMLTEMPDIR%% in sml-mode-color.el }
-    SmlModeColor := ExpandConstant('{app}\emacs-23.2\sml-mode-color.el');
-    if not LoadStringFromFile(SmlModeColor, SmlModeColorContents) then
-      RaiseException('Unable to read from sml-mode-color.el.');
-
-    StringChangeEx(SmlModeColorContents, '%%EMACSDIR%%', EmacsDir, True);
-
-    StringChangeEx(SmlModeColorContents, '%%SMLTEMPDIR%%', SmlTempDir, True);
-
-    if not SaveStringToFile(SmlModeColor, SmlModeColorContents, False) then
-      RaiseException('Unable to write to sml-mode-color.el.');
-  end;
-end;
-
-
+[UninstallRun]
+Filename: "{app}\setenv.exe"; Parameters: "-d PATH %""{app}\mosml\bin"""; StatusMsg: "{cm:Updating,PATH}"; Flags: runhidden; Components: mosml
+Filename: "{app}\setenv.exe"; Parameters: "-d MOSMLLIB"; StatusMsg: "{cm:Deleting,MOSMLLIB}"; Flags: runhidden; Components: mosml
 
 
