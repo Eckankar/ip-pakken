@@ -9,7 +9,7 @@
 (iswitchb-mode 1)                         ; better buffer switching
 (column-number-mode 1)                    ; show column numbers
 (setq-default show-trailing-whitespace t) ; show trailing whitespace
-(setq-default indent-tabs-mode nil)       ; indent with tabs, not spaces
+(setq-default indent-tabs-mode nil)       ; indent with spaces, not tabs
 
 ;; Make Emacs more Windows-y: http://www.emacswiki.org/emacs/CuaMode
 (cua-mode t)
