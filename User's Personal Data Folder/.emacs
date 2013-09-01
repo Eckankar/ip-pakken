@@ -10,6 +10,7 @@
 (column-number-mode 1)                    ; show column numbers
 (setq-default show-trailing-whitespace t) ; show trailing whitespace
 (setq-default indent-tabs-mode nil)       ; indent with spaces, not tabs
+(setq default-tab-width 4)                ; tab size set to 4 spaces
 
 ;; Make Emacs more Windows-y: http://www.emacswiki.org/emacs/CuaMode
 (cua-mode t)
@@ -27,6 +28,7 @@
 (autoload 'sml-mode "sml-mode" () t)
 (setq auto-mode-alist (cons '("\\.sml$" . sml-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.sig$" . sml-mode) auto-mode-alist))
+(add-hook 'sml-mode-hook (lambda () (setq sml-indent-level 2)))
 
 ;; Highlight column 80
 (add-to-list 'load-path "~/.emacs.d/column-marker/")
