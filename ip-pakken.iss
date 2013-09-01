@@ -47,10 +47,10 @@ Name: startmenu; Description: "{cm:StartMenu}"
 Name: desktopicon; Description: "{cm:DesktopIcon}"
 
 [Icons]
-Name: "{group}\{cm:MosMLName}"; Filename: "{app}\mosml\bin\mosml.exe"; Components: mosml; Tasks: startmenu
+Name: "{group}\{cm:MosMLName}"; Filename: "{app}\mosml\bin\mosml.exe"; Parameters: "-P full"; Components: mosml; Tasks: startmenu
 Name: "{group}\{cm:EmacsName}"; Filename: "{app}\emacs-24.3\bin\runemacs.exe"; Components: emacs; Tasks: startmenu
 Name: "{group}\{cm:UninstallProgram,MosML + emacs}"; Filename: "{uninstallexe}"; Tasks: startmenu
-Name: "{commondesktop}\{cm:MosMLName}"; Filename: "{app}\mosml\bin\mosml.exe"; Components: mosml; Tasks: desktopicon
+Name: "{commondesktop}\{cm:MosMLName}"; Filename: "{app}\mosml\bin\mosml.exe"; Parameters: "-P full"; Components: mosml; Tasks: desktopicon
 Name: "{commondesktop}\{cm:EmacsName}"; Filename: "{app}\emacs-24.3\bin\runemacs.exe"; Components: emacs; Tasks: desktopicon
 
 [CustomMessages]
