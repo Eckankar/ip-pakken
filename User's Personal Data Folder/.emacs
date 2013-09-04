@@ -8,7 +8,6 @@
 (global-font-lock-mode t)                 ; enable syntax highlighting
 (iswitchb-mode 1)                         ; better buffer switching
 (column-number-mode 1)                    ; show column numbers
-(setq-default show-trailing-whitespace t) ; show trailing whitespace
 (setq-default indent-tabs-mode nil)       ; indent with spaces, not tabs
 (setq default-tab-width 4)                ; tab size set to 4 spaces
 
@@ -30,15 +29,10 @@
 (setq auto-mode-alist (cons '("\\.sig$" . sml-mode) auto-mode-alist))
 (add-hook 'sml-mode-hook (lambda () (setq sml-indent-level 2)))
 
-;; Highlight column 80
-(add-to-list 'load-path "~/.emacs.d/column-marker/")
-(require 'column-marker)
-(defface column-marker-4 '((t (:background "red")))
-  "Bad, mean, red background color"
-  :group 'faces)
-(defvar column-marker-4-face 'column-marker-4)
-(column-marker-create column-marker-4 column-marker-4-face)
-(add-hook 'sml-mode-hook (lambda () (interactive) (column-marker-4 81)))
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail trailing)) ;; high-light long lines and trailing whitespace
+(add-hook 'prog-mode-hook 'whitespace-mode)
 
 ;; Don't clutter the filesystem tree with backup files
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
