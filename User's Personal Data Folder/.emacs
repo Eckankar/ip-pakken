@@ -17,6 +17,11 @@
 (transient-mark-mode 1) ;; No region when it is not highlighted
 (setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
 
+;; UTF8
+(prefer-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
+
 ;; SML
 (setq sml-mode-dir "~/.emacs.d/sml-mode/")
 (setq sml-program-name "mosml")
