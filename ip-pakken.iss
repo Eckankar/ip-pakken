@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{16A559DB-7E90-42DF-B59D-E6F877FB9766}
 AppName=MosML og emacs
-AppVersion=2.013
+AppVersion=2.015
 ;AppVerName=MosML + emacs 2
 AppPublisher=DIKU
 AppPublisherURL=http://diku.dk
