@@ -78,12 +78,6 @@ da.Setting=Sætter %1...
 da.Deleting=Sletter %1...
 en.Deleting=Deleting %1...
 
-[Run]
-Filename: "{app}\setenv.exe"; Parameters: "-a PATH %""{app}\mosml\bin"""; StatusMsg: "{cm:Updating,PATH}"; Flags: runhidden; Components: mosml
-Filename: "{app}\setenv.exe"; Parameters: "-a MOSMLLIB ""{app}\mosml\lib\mosml"""; StatusMsg: "{cm:Setting,MOSMLLIB}"; Flags: runhidden; Components: mosml
-
-[UninstallRun]
-Filename: "{app}\setenv.exe"; Parameters: "-d PATH %""{app}\mosml\bin"""; StatusMsg: "{cm:Updating,PATH}"; Flags: runhidden; Components: mosml
-Filename: "{app}\setenv.exe"; Parameters: "-d MOSMLLIB"; StatusMsg: "{cm:Deleting,MOSMLLIB}"; Flags: runhidden; Components: mosml
-
-
+[Registry]
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}\mosml\bin"; Flags: preservestringtype; Components: mosml
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: string; ValueName: "MOSMLLIB"; ValueData: "{app}\mosml\lib\mosml"; Flags: uninsdeletevalue; Components: mosml

@@ -3,10 +3,7 @@ To create an installer from this:
     * Download emacs binaries and place in emacs-24.3
         Link: http://ftp.gnu.org/gnu/emacs/windows/
     * Download Moscow ML binaries and place in mosml
-        Link: http://www.itu.dk/~sestoft/mosml.html
-    * Download setenv.exe and place in root folder
-        Link: http://www.codeguru.com/cpp/w-p/win32/tutorials/article.php/c10849
-        Note: setenv.exe is 16-bit, so it will need to be compiled from source as 32-bit.
+        Link: http://www.mosml.org
     * Download and install Inno Setup (non-unicode version)
         Link: http://www.jrsoftware.org/isinfo.php
     * Open the .iss file and select Build > Compile from the menu.
@@ -14,7 +11,6 @@ To create an installer from this:
 Tested with:
     emacs 24.3, full binary distribution
     Moscow ML 2.10
-    SetEnv 1.04
     InnoSetup 5.5.3 non-unicode
 
 Gotchas:
