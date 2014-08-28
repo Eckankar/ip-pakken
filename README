@@ -11,7 +11,7 @@ To create an installer from this:
 Tested with:
     emacs 24.3, full binary distribution
     Moscow ML 2.10
-    InnoSetup 5.5.3 non-unicode
+    InnoSetup 5.5.5 non-unicode
 
 Gotchas:
     * If debugging the installer, please do note that it does not write a .emacs if it already exists, nor does the uninstaller remove it.
