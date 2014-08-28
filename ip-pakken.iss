@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{16A559DB-7E90-42DF-B59D-E6F877FB9766}
 AppName=MosML og emacs
-AppVersion=2.015
+AppVersion=2.016
 ;AppVerName=MosML + emacs 2
 AppPublisher=DIKU
 AppPublisherURL=http://diku.dk
@@ -28,14 +28,13 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 Source: "mosml\*"; DestDir: "{app}\mosml"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: mosml
 Source: "emacs-24.3\*"; DestDir: "{app}\emacs-24.3"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: emacs
 Source: "User's Personal Data Folder\*"; DestDir: "{%HOME|{userappdata}}"; Flags: onlyifdoesntexist ignoreversion uninsneveruninstall recursesubdirs createallsubdirs; Components: emacs
-Source: "setenv.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 [Dirs]
 ; tmp-dir for SML-mode
 Name: "{localappdata}\emacs\smltmp"; Components: emacs
 
 [Components]
-Name: "mosml"; Description: "Moscow ML v2.10"; Flags: fixed; Types: full custom
+Name: "mosml"; Description: "Moscow ML v2.10.1"; Flags: fixed; Types: full custom
 Name: "emacs"; Description: "emacs v24.3"; Types: full custom
 
 [Types]
