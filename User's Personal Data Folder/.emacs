@@ -10,6 +10,7 @@
 (column-number-mode 1)                    ; show column numbers
 (setq-default indent-tabs-mode nil)       ; indent with spaces, not tabs
 (setq default-tab-width 4)                ; tab size set to 4 spaces
+(require 'iso-transl)                     ; make dead keys work properly
 
 ;; Make Emacs more Windows-y: http://www.emacswiki.org/emacs/CuaMode
 (cua-mode t)
